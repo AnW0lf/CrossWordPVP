@@ -7,13 +7,11 @@ public class Road : MonoBehaviour
 {
     [SerializeField] private AnimatedPanel _playerPanel = null;
     [SerializeField] private Bot _bot = null;
-    [SerializeField] private string[] _dictionary = null;
+    [SerializeField] public string[] dictionary = null;
     [SerializeField] private LetterBlock[] _blocks = null;
 
-    public List<string> Dictionary => new List<string>(_dictionary);
-
     private Team _round = Team.Player;
-    private List<string> _words = new List<string>();
+    [HideInInspector] public List<string> _words = new List<string>();
 
 
     private int ChainLength
@@ -83,7 +81,7 @@ public class Road : MonoBehaviour
         }
 
         int oldChainLength = ChainLength;
-        _words.Add(word);
+        _words.Add(word.ToLower());
         int chainLength = ChainLength;
 
         for(int i = oldChainLength; i < chainLength && i < _blocks.Length; i++)
@@ -107,7 +105,7 @@ public class Road : MonoBehaviour
 
     private bool CheckWin() => _blocks[_blocks.Length - 1].letter != string.Empty;
 
-    private bool CheckWord(string word) => _dictionary.Contains(word.ToLower());
+    private bool CheckWord(string word) => dictionary.Contains(word.ToLower()) && !_words.Contains(word.ToLower());
 }
 
 public enum Team { Empty = 0, Player = 1, Enemy = 2 }

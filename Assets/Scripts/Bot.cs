@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Bot : MonoBehaviour
 {
     [SerializeField] private Road _road = null;
 
-    private List<string> _dictionary = null;
 
-    public string Word => _dictionary[Random.Range(0, _dictionary.Count)];
-
-    private void Awake()
+    public string Word
     {
-        _dictionary = _road.Dictionary;
+        get
+        {
+            string[] words = _road.dictionary.Where((word) => !_road._words.Contains(word)).ToArray();
+            return words[Random.Range(0, words.Length)];
+        }
     }
+
 
     public void Begin()
     {

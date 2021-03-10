@@ -5598,17 +5598,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPanel: {fileID: 836369378}
   _bot: {fileID: 932100389}
-  _dictionary:
-  - cat
-  - dog
-  - car
-  - house
-  - snake
-  - elephant
-  - tea
-  - coffee
-  - mouse
-  - rat
+  dictionary:
+  - time
+  - year
+  - people
+  - way
+  - day
+  - man
+  - thing
+  - woman
+  - life
+  - child
+  - world
+  - school
+  - state
+  - family
+  - student
+  - group
+  - country
+  - problem
+  - hand
+  - part
+  - place
+  - case
+  - week
+  - company
+  - system
+  - program
+  - question
+  - work
+  - government
+  - number
+  - night
+  - point
+  - home
+  - water
+  - room
+  - mother
+  - area
+  - money
+  - story
+  - fact
   _blocks:
   - {fileID: 1370711002}
   - {fileID: 535124525}
@@ -5664,6 +5694,7 @@ MonoBehaviour:
   - {fileID: 1848415149}
   - {fileID: 98255570}
   - {fileID: 420708517}
+  _words: []
 --- !u!114 &2126292785 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 352517895205766414, guid: f98ac4d07d002c8439901df198d0ae7d, type: 3}
