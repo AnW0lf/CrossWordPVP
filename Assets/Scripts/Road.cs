@@ -44,7 +44,7 @@ public class Road : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, LastLetterBlock.localRotation, 0.05f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(-LastLetterBlock.localEulerAngles), 0.05f);
     }
 
     public void NextRound()
