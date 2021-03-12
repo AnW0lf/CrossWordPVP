@@ -6,6 +6,7 @@ public class DrawSpiral : MonoBehaviour
 {
     [SerializeField] private GameObject _prefab = null;
     [SerializeField] private int _count = 54;
+    [SerializeField] private int _offset = 0;
     [SerializeField] private float _a = 0f;
     [SerializeField] private float _b = 0f;
     [SerializeField] private float _step = 0f;
@@ -24,21 +25,9 @@ public class DrawSpiral : MonoBehaviour
         for(int i = 0; i < _count; i++)
         {
             Transform t = _objects[i].transform;
-            //Vector3 direction = RotateAroundY(Vector3.forward, i * _angle);
-            float sigma = 2f * Mathf.PI * Mathf.Sqrt(2f * _step * i / _b);
+            float sigma = 2f * Mathf.PI * Mathf.Sqrt(2f * _step * (i + _offset) / _b);
             t.localPosition = new Vector3((_a + _b * sigma) * Mathf.Cos(sigma), 0f, (_a + _b * sigma) * Mathf.Sin(sigma));
-            t.LookAt(transform.position + t.localPosition * 1000f);
+            t.LookAt(t.position + (t.position - transform.position) * 1000f);
         }
-    }
-
-    private Vector3 RotateAroundY(Vector3 direction, float angle)
-    {
-        float sin = Mathf.Sin(angle);
-        float cos = Mathf.Cos(angle);
-
-        float x = direction.x * cos - direction.z * sin;
-        float z = direction.x * sin + direction.z * cos;
-
-        return new Vector3(x, direction.y, z);
     }
 }

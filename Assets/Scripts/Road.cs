@@ -95,18 +95,18 @@ public class Road : MonoBehaviour
         }
     }
 
-    public void Submit()
+    public bool Submit()
     {
         string word = Word;
         _inputWord = string.Empty;
         if (_round == Team.Player)
         {
-            if (!CheckWord(word)) return;
+            if (!CheckWord(word)) return false;
             _playerPanel.Visible = false;
         }
         else
         {
-            if (!CheckWord(word)) return;
+            if (!CheckWord(word)) return false;
         }
 
         _submitted = true;
@@ -126,13 +126,20 @@ public class Road : MonoBehaviour
             StartCoroutine(Utils.DelayedCall(0.4f + 0.1f * index, () => block.Show()));
         }
 
-        if (CheckWin()) return;
-
-        StartCoroutine(Utils.DelayedCall((chainLength - oldChainLength) * 0.1f + 1f, () =>
+        if (CheckWin())
         {
-            NextRound();
-            BeginRound(_round);
-        }));
+
+        }
+        else
+        {
+            StartCoroutine(Utils.DelayedCall((chainLength - oldChainLength) * 0.1f + 1f, () =>
+            {
+                NextRound();
+                BeginRound(_round);
+            }));
+        }
+
+        return true;
     }
 
     private bool CheckWin() => _blocks[_blocks.Length - 1].Letter != string.Empty;
