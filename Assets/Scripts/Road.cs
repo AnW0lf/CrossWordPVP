@@ -24,27 +24,36 @@ public class Road : MonoBehaviour
         }
     }
 
-    private Transform LastLetterBlock
+    private bool _submitted = false;
+
+    public Transform LastLetterBlock
     {
         get
         {
-            if (!_blocks[0].Visible) return _blocks[0].transform;
+            if (_submitted)
+            {
+                if (!_blocks[0].Visible) return _blocks[0].transform;
 
-            for (int i = 0; i < _blocks.Length; i++)
-                if (!_blocks[i].Visible) return _blocks[i - 1].transform;
+                for (int i = 0; i < _blocks.Length; i++)
+                    if (!_blocks[i].Visible) return _blocks[i - 1].transform;
 
-            return _blocks[_blocks.Length - 1].transform;
+                return _blocks[_blocks.Length - 1].transform;
+            }
+            else
+            {
+                if (_blocks[0].Letter == string.Empty) return _blocks[0].transform;
+
+                for (int i = 0; i < _blocks.Length; i++)
+                    if (_blocks[i].Letter == string.Empty) return _blocks[i - 1].transform;
+
+                return _blocks[_blocks.Length - 1].transform;
+            }
         }
     }
 
     private void Start()
     {
         StartCoroutine(Utils.DelayedCall(1f, () => BeginRound(_round)));
-    }
-
-    private void Update()
-    {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(-LastLetterBlock.localEulerAngles), 0.05f);
     }
 
     public void NextRound()
@@ -99,6 +108,9 @@ public class Road : MonoBehaviour
         {
             if (!CheckWord(word)) return;
         }
+
+        _submitted = true;
+        StartCoroutine(Utils.DelayedCall(word.Length * 0.1f + 0.8f, () => _submitted = false));
 
         int oldChainLength = ChainLength;
         _words.Add(word.ToLower());
