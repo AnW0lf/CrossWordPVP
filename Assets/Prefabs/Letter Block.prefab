@@ -107,8 +107,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 1711276032
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0.4}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -220,7 +220,6 @@ MonoBehaviour:
   _playerMaterial: {fileID: 2100000, guid: 16e4135c69b33304aa56a0374300f7b6, type: 2}
   _enemyMaterial: {fileID: 2100000, guid: 1a97454c066c9a240a0ada0a8567c3b0, type: 2}
   team: 0
-  letter: 
 --- !u!1 &5006783920581433767
 GameObject:
   m_ObjectHideFlags: 0

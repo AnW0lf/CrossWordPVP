@@ -10,7 +10,17 @@ public class LetterBlock : MonoBehaviour
     [SerializeField] private Material _enemyMaterial = null;
 
     public Team team = Team.Empty;
-    public string letter = string.Empty;
+    public string Letter
+    {
+        get => _label.text;
+        set => _label.text = value.ToUpper();
+    }
+
+    public Color LetterColor
+    {
+        get => _label.color;
+        set => _label.color = value;
+    }
 
     public bool Visible { get; private set; } = false;
 
@@ -29,7 +39,7 @@ public class LetterBlock : MonoBehaviour
                 break;
         }
 
-        _label.text = letter.ToUpper();
+        LetterColor = Color.black;
 
         Visible = true;
     }

@@ -6,6 +6,7 @@ public class AnimatedPanel : MonoBehaviour
     [SerializeField] private bool _visible = false;
     [SerializeField] private RectTransform _window = null;
     [SerializeField] private TMP_InputField _input = null;
+    [SerializeField] private Road _road = null;
 
     public bool Visible
     {
@@ -32,5 +33,8 @@ public class AnimatedPanel : MonoBehaviour
         }
     }
 
-    public string Word => _input.text;
+    public void SetWord()
+    {
+        _road.Word = _input.text;
+    }
 }

@@ -7,7 +7,7 @@ public class Road : MonoBehaviour
 {
     [SerializeField] private AnimatedPanel _playerPanel = null;
     [SerializeField] private Bot _bot = null;
-    [SerializeField] public string[] dictionary = null;
+    [SerializeField] public Dictionary _dictionary = null;
     [SerializeField] private LetterBlock[] _blocks = null;
 
     private Team _round = Team.Player;
@@ -55,7 +55,7 @@ public class Road : MonoBehaviour
 
     private void BeginRound(Team round)
     {
-        if(_round == Team.Player)
+        if (_round == Team.Player)
         {
             _playerPanel.Visible = true;
         }
@@ -65,18 +65,38 @@ public class Road : MonoBehaviour
         }
     }
 
+    private string _inputWord = string.Empty;
+    public string Word
+    {
+        get => _inputWord;
+        set
+        {
+            _inputWord = value;
+            int chainLength = ChainLength;
+
+            for (int i = chainLength; i < _blocks.Length; i++)
+            {
+                int index = i - chainLength;
+                LetterBlock block = _blocks[i];
+                if (index < Word.Length)
+                    block.Letter = Word[index].ToString();
+                else
+                    block.Letter = string.Empty;
+            }
+        }
+    }
+
     public void Submit()
     {
-        string word = string.Empty;
+        string word = Word;
+        _inputWord = string.Empty;
         if (_round == Team.Player)
         {
-            word = _playerPanel.Word;
             if (!CheckWord(word)) return;
-            _playerPanel.Visible = false;    
+            _playerPanel.Visible = false;
         }
         else
         {
-            word = _bot.Word;
             if (!CheckWord(word)) return;
         }
 
@@ -84,11 +104,11 @@ public class Road : MonoBehaviour
         _words.Add(word.ToLower());
         int chainLength = ChainLength;
 
-        for(int i = oldChainLength; i < chainLength && i < _blocks.Length; i++)
+        for (int i = oldChainLength; i < chainLength && i < _blocks.Length; i++)
         {
             int index = i - oldChainLength;
             LetterBlock block = _blocks[i];
-            block.letter = word[index].ToString();
+            block.Letter = word[index].ToString();
             block.team = _round;
 
             StartCoroutine(Utils.DelayedCall(0.4f + 0.1f * index, () => block.Show()));
@@ -103,9 +123,9 @@ public class Road : MonoBehaviour
         }));
     }
 
-    private bool CheckWin() => _blocks[_blocks.Length - 1].letter != string.Empty;
+    private bool CheckWin() => _blocks[_blocks.Length - 1].Letter != string.Empty;
 
-    private bool CheckWord(string word) => dictionary.Contains(word.ToLower()) && !_words.Contains(word.ToLower());
+    private bool CheckWord(string word) => _dictionary.CheckWord(word);
 }
 
 public enum Team { Empty = 0, Player = 1, Enemy = 2 }
