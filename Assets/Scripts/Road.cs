@@ -101,7 +101,22 @@ public class Road : MonoBehaviour
         _inputWord = string.Empty;
         if (_round == Team.Player)
         {
-            if (!CheckWord(word)) return false;
+            if (!CheckWord(word))
+            {
+                Color normalColor = _blocks[_blocks.Length - 1].LetterColor;
+
+                foreach (var block in _blocks.Where((b) => b.team == Team.Empty))
+                    block.LetterColor = Color.red;
+
+                StartCoroutine(Utils.DelayedCall(0.2f,
+                    () =>
+                    {
+                        foreach (var block in _blocks.Where((b) => b.team == Team.Empty))
+                            block.LetterColor = normalColor;
+                    }));
+
+                return false;
+            }
             _playerPanel.Visible = false;
         }
         else
