@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad07a401c427ef24c969fe721863f38d, type: 3}
-  m_Name: 3
+  m_Name: tiger
   m_EditorClassIdentifier: 
-  _icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  _icon: {fileID: 21300000, guid: 840b1cd5ed9ba0040923928c03d28efb, type: 3}
   _words:
-  - three
+  - tiger
+  - sherkhan
