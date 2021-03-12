@@ -19,7 +19,7 @@ public class AnimatedPanel : MonoBehaviour
             if (Visible)
             {
                 _input.text = string.Empty;
-                _input.Select();
+                _input.ActivateInputField();
             }
         }
     }
@@ -31,6 +31,6 @@ public class AnimatedPanel : MonoBehaviour
 
     public void Submit()
     {
-        if (!_road.Submit()) _input.Select();
+        if (!_road.Submit()) _input.ActivateInputField();
     }
 }
