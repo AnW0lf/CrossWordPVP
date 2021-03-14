@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Road : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class Road : MonoBehaviour
     [SerializeField] public Dictionary _dictionary = null;
     [SerializeField] public DrawSpiral _spiral = null;
     [SerializeField] public int _defaultLength = 25;
+    [SerializeField] public TextMeshProUGUI _finalLabel = null;
+    [SerializeField] public GameObject _reloadSceneButton = null;
     [SerializeField] private LetterBlock[] _blocks = null;
 
     private Team _round = Team.Player;
@@ -155,7 +159,10 @@ public class Road : MonoBehaviour
 
         if (CheckWin())
         {
+            StartCoroutine(Utils.DelayedCall(2f, () => _reloadSceneButton.SetActive(true)));
 
+            if (_blocks[_blocks.Length - 1].team == Team.Player) _finalLabel.text = "VICTORY";
+            else _finalLabel.text = "DEFEAT";
         }
         else
         {
@@ -172,6 +179,8 @@ public class Road : MonoBehaviour
     private bool CheckWin() => _blocks[_blocks.Length - 1].Letter != string.Empty;
 
     private bool CheckWord(string word) => _dictionary.CheckWord(word);
+
+    public void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }
 
 public enum Team { Empty = 0, Player = 1, Enemy = 2 }
