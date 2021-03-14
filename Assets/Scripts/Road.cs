@@ -8,6 +8,8 @@ public class Road : MonoBehaviour
     [SerializeField] private AnimatedPanel _playerPanel = null;
     [SerializeField] private Bot _bot = null;
     [SerializeField] public Dictionary _dictionary = null;
+    [SerializeField] public DrawSpiral _spiral = null;
+    [SerializeField] public int _defaultLength = 25;
     [SerializeField] private LetterBlock[] _blocks = null;
 
     private Team _round = Team.Player;
@@ -25,6 +27,11 @@ public class Road : MonoBehaviour
     }
 
     private bool _submitted = false;
+
+    public void SetBlocks(GameObject[] objects)
+    {
+        _blocks = objects.Select((o) => o.GetComponent<LetterBlock>()).ToArray();
+    }
 
     public Transform LastLetterBlock
     {
@@ -53,6 +60,7 @@ public class Road : MonoBehaviour
 
     private void Start()
     {
+        _spiral.Count = _defaultLength;
         StartCoroutine(Utils.DelayedCall(1f, () => BeginRound(_round)));
     }
 
@@ -82,6 +90,8 @@ public class Road : MonoBehaviour
         {
             _inputWord = value;
             int chainLength = ChainLength;
+
+            _spiral.Count = Mathf.Max(_defaultLength, chainLength + Word.Length);
 
             for (int i = chainLength; i < _blocks.Length; i++)
             {
@@ -130,6 +140,8 @@ public class Road : MonoBehaviour
         int oldChainLength = ChainLength;
         _words.Add(word.ToLower());
         int chainLength = ChainLength;
+
+        if (chainLength > _blocks.Length) _spiral.Count = chainLength;
 
         for (int i = oldChainLength; i < chainLength && i < _blocks.Length; i++)
         {
