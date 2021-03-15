@@ -23,6 +23,8 @@ public class LetterBlock : MonoBehaviour
         set => _label.color = value;
     }
 
+    public IBonus Bonus { get; set; } = null;
+
     public bool IsWinBlock { get; set; } = false;
 
     public bool Visible { get; private set; } = false;
@@ -45,5 +47,8 @@ public class LetterBlock : MonoBehaviour
         LetterColor = Color.black;
 
         Visible = true;
+
+        Bonus.Perform(team);
+        Bonus.Delete();
     }
 }

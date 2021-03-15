@@ -54,6 +54,14 @@ public class Dictionary : MonoBehaviour
             AddEmoji();
     }
 
+    public string GetDefaultWord()
+    {
+        List<string> words = new List<string>();
+        foreach (var emoji in list)
+            words.Add(emoji.Data.Words[0]);
+        return words[Random.Range(0, words.Count)];
+    }
+
     public string GetRandomWord()
     {
         List<string> words = new List<string>();
