@@ -219,6 +219,7 @@ MonoBehaviour:
   _emptyMaterial: {fileID: 2100000, guid: 1ed57ff3e5cacde4d8053fd2180eee91, type: 2}
   _playerMaterial: {fileID: 2100000, guid: 16e4135c69b33304aa56a0374300f7b6, type: 2}
   _enemyMaterial: {fileID: 2100000, guid: 1a97454c066c9a240a0ada0a8567c3b0, type: 2}
+  _winMaterial: {fileID: 2100000, guid: 90ee563ed14b49a4e9c9b679457f91c8, type: 2}
   team: 0
 --- !u!1 &5006783920581433767
 GameObject:

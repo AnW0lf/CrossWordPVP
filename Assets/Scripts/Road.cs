@@ -105,6 +105,7 @@ public class Road : MonoBehaviour
                     block.Letter = Word[index].ToString();
                 else
                     block.Letter = string.Empty;
+                block.IsWinBlock = i >= _defaultLength - 1;
             }
         }
     }

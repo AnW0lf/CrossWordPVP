@@ -8,6 +8,7 @@ public class LetterBlock : MonoBehaviour
     [SerializeField] private Material _emptyMaterial = null;
     [SerializeField] private Material _playerMaterial = null;
     [SerializeField] private Material _enemyMaterial = null;
+    [SerializeField] private Material _winMaterial = null;
 
     public Team team = Team.Empty;
     public string Letter
@@ -22,6 +23,8 @@ public class LetterBlock : MonoBehaviour
         set => _label.color = value;
     }
 
+    public bool IsWinBlock { get; set; } = false;
+
     public bool Visible { get; private set; } = false;
 
     public void Show()
@@ -32,10 +35,10 @@ public class LetterBlock : MonoBehaviour
                 _renderer.material = _emptyMaterial;
                 break;
             case Team.Player:
-                _renderer.material = _playerMaterial;
+                _renderer.material = IsWinBlock ? _winMaterial : _playerMaterial;
                 break;
             case Team.Enemy:
-                _renderer.material = _enemyMaterial;
+                _renderer.material = IsWinBlock ? _winMaterial : _enemyMaterial;
                 break;
         }
 
