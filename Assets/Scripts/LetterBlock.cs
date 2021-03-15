@@ -48,7 +48,10 @@ public class LetterBlock : MonoBehaviour
 
         Visible = true;
 
-        Bonus.Perform(team);
-        Bonus.Delete();
+        if (Bonus != null)
+        {
+            Bonus.Perform(team);
+            Bonus.Delete();
+        }
     }
 }

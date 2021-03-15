@@ -41,24 +41,24 @@ public class Road : MonoBehaviour
     {
         get
         {
-            if (_submitted)
-            {
-                if (!_blocks[0].Visible) return _blocks[0].transform;
+            //if (_submitted)
+            //{
+            //    if (!_blocks[0].Visible) return _blocks[0].transform;
 
-                for (int i = 0; i < _blocks.Length; i++)
-                    if (!_blocks[i].Visible) return _blocks[i - 1].transform;
+            //    for (int i = 0; i < _blocks.Length; i++)
+            //        if (!_blocks[i].Visible) return _blocks[i - 1].transform;
 
-                return _blocks[_blocks.Length - 1].transform;
-            }
-            else
-            {
-                if (_blocks[0].Letter == string.Empty) return _blocks[0].transform;
+            //    return _blocks[_blocks.Length - 1].transform;
+            //}
+            //else
+            //{
+            if (_blocks[0].Letter == string.Empty) return _blocks[0].transform;
 
-                for (int i = 0; i < _blocks.Length; i++)
-                    if (_blocks[i].Letter == string.Empty) return _blocks[i - 1].transform;
+            for (int i = 0; i < _blocks.Length; i++)
+                if (_blocks[i].Letter == string.Empty) return _blocks[i - 1].transform;
 
-                return _blocks[_blocks.Length - 1].transform;
-            }
+            return _blocks[_blocks.Length - 1].transform;
+            //}
         }
     }
 

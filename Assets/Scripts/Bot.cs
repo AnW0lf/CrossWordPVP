@@ -33,7 +33,6 @@ public class Bot : MonoBehaviour
                 return word.Substring(0, length);
             }));
 
-
         StartCoroutine(Utils.DelayedCall(delay + 0.5f, () => _road.Submit()));
     }
 }
