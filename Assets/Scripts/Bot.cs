@@ -16,6 +16,11 @@ public class Bot : MonoBehaviour
     {
         string word = string.Empty;
 
+        while(LevelData.Instance.CanSpend(Team.Enemy) && Random.Range(0f, 1f) > 0.5f)
+        {
+            LevelData.Instance.Spend(Team.Enemy);
+        }
+
         if(Random.Range(0f, 1f) > _chance)
         {
             word = _road._dictionary.GetDefaultWord();

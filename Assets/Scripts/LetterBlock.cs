@@ -51,7 +51,6 @@ public class LetterBlock : MonoBehaviour
         if (Bonus != null)
         {
             Bonus.Perform(team);
-            Bonus.Delete();
         }
     }
 }
