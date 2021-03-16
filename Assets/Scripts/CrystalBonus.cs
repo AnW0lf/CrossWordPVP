@@ -10,8 +10,8 @@ public class CrystalBonus : MonoBehaviour, IBonus
     {
         if (_deleted) return;
         _deleted = true;
-        StartCoroutine(Utils.CrossFading(Vector3.one, Vector3.zero, 0.4f, (scale) => transform.localScale = scale, (a, b, c) => Vector3.Lerp(a, b, c)));
-        StartCoroutine(Utils.DelayedCall(0.5f, () => Destroy(gameObject)));
+        StartCoroutine(Utils.CrossFading(Vector3.one, Vector3.zero, 0.2f, (scale) => transform.localScale = scale, (a, b, c) => Vector3.Lerp(a, b, c)));
+        StartCoroutine(Utils.DelayedCall(0.3f, () => Destroy(gameObject)));
     }
 
     public void Perform(Team team)
@@ -21,7 +21,7 @@ public class CrystalBonus : MonoBehaviour, IBonus
         {
             var crystalCounter = FindObjectOfType<CrystalCounter>();
             StartCoroutine(Utils.CrossFading(transform.position, crystalCounter.transform.position, 0.5f, (pos) => transform.position = pos, (a, b, c) => Vector3.Lerp(a, b, c)));
-            StartCoroutine(Utils.DelayedCall(0.1f, Delete));
+            StartCoroutine(Utils.DelayedCall(0.3f, Delete));
             StartCoroutine(Utils.DelayedCall(0.5f, () => LevelData.Instance.AddCrystal(this)));
         }
         else
