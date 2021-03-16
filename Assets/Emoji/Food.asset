@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa0fe5b52a7eeb4ca9dad3ceccb796d, type: 3}
+  m_Name: Food
+  m_EditorClassIdentifier: 
+  _name: Food
+  _emojies:
+  - {fileID: 11400000, guid: 2ac355490515bfd4782ae7db6b4bdff8, type: 2}
+  - {fileID: 11400000, guid: caff1bc0419feb14eb2e56f8f3614213, type: 2}
+  - {fileID: 11400000, guid: 0ac4b5fbd524854448e951f5d2190f04, type: 2}
+  - {fileID: 11400000, guid: d2b8d9628870a19479ad3e41e4902412, type: 2}
+  - {fileID: 11400000, guid: ac194121454593c41b877a0844a3721f, type: 2}
+  - {fileID: 11400000, guid: 91609ed7cfbfbf644a56f69b7a5b5fac, type: 2}
+  - {fileID: 11400000, guid: 4424df710ce958948b61b358741a88ff, type: 2}
+  - {fileID: 11400000, guid: a2fe349a1c7ab2346add2a2a604d9ca4, type: 2}
+  - {fileID: 11400000, guid: 4fe819d9f0b11944896c71e934515fde, type: 2}
