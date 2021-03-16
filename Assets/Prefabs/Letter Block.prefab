@@ -56,7 +56,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2023810763005780234, guid: 2d6262af094e0b04aa936fd25b14b08e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2d6262af094e0b04aa936fd25b14b08e, type: 2}
+  m_sharedMaterial: {fileID: -2023810763005780234, guid: 2d6262af094e0b04aa936fd25b14b08e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -219,7 +219,7 @@ MonoBehaviour:
   _emptyMaterial: {fileID: 2100000, guid: 1ed57ff3e5cacde4d8053fd2180eee91, type: 2}
   _playerMaterial: {fileID: 2100000, guid: 16e4135c69b33304aa56a0374300f7b6, type: 2}
   _enemyMaterial: {fileID: 2100000, guid: 1a97454c066c9a240a0ada0a8567c3b0, type: 2}
-  _winMaterial: {fileID: 2100000, guid: 2108d8603f3bd8a4889e438479b3fd2d, type: 2}
+  _winMaterial: {fileID: 2100000, guid: 640dc2f025ee433489ca50d9f685de47, type: 2}
   team: 0
 --- !u!1 &5006783920581433767
 GameObject:
