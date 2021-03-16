@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa0fe5b52a7eeb4ca9dad3ceccb796d, type: 3}
+  m_Name: Numbers
+  m_EditorClassIdentifier: 
+  _name: Numbers
+  _emojies:
+  - {fileID: 11400000, guid: ec158acf7e4fd3d4c848592ac19b678b, type: 2}
+  - {fileID: 11400000, guid: 9bbbd79c0a12af74cbd135024d2a1b09, type: 2}
+  - {fileID: 11400000, guid: 6332549d3cd0f3646bdb46ffa3f78252, type: 2}
+  - {fileID: 11400000, guid: dd1c9dee752df8f4198f9f05bb8c1b33, type: 2}
+  - {fileID: 11400000, guid: 256aaf98f61e0a549b152338b97ba359, type: 2}
+  - {fileID: 11400000, guid: 36cf2dd97abe74244b0dc30ed34855e9, type: 2}
+  - {fileID: 11400000, guid: b72388bb6fd117b48b1838d91b07add0, type: 2}
+  - {fileID: 11400000, guid: 4a700c060c839624dad2de421509cd4b, type: 2}
+  - {fileID: 11400000, guid: 2a32646c11e396240b080816edb34139, type: 2}
+  - {fileID: 11400000, guid: 77c36b0af6e8c06449e8c198c4d4e0c7, type: 2}
+  - {fileID: 11400000, guid: dd5d2a7eeabd2d0468a1d08b50d1e888, type: 2}
+  - {fileID: 11400000, guid: 4baf9e3dc0469ec48ad29f4de6bd9996, type: 2}
+  - {fileID: 11400000, guid: 891582e7b1b2c0c489008258ad87d5b5, type: 2}
