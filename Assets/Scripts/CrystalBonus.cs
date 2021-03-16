@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CrystalBonus : MonoBehaviour, IBonus
 {
     public Team Team { get; set; } = Team.Empty;
+    public Road Road { get; set; } = null;
 
     private bool _deleted = false;
     public void Delete()
@@ -19,5 +18,6 @@ public class CrystalBonus : MonoBehaviour, IBonus
     {
         Team = team;
         LevelData.Instance.AddCrystal(this);
+        Delete();
     }
 }

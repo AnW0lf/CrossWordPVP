@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelData : MonoBehaviour
 {
@@ -8,30 +7,34 @@ public class LevelData : MonoBehaviour
 
     [SerializeField] private Road _road = null;
 
+    public UnityAction<Team, int> OnCrystalCountChanged { get; set; } = null;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
     }
 
-    private int _playerCrystals = 0;
-    private int _botCrystals = 0;
+    public int PlayerCrystals { get; private set; } = 0;
+    public int BotCrystals { get; private set; } = 0;
 
     public void AddCrystal(CrystalBonus crystal)
     {
         switch (crystal.Team)
         {
             case Team.Empty:
-                break;
+                return;
             case Team.Player:
-                _playerCrystals++;
+                PlayerCrystals++;
                 break;
             case Team.Enemy:
-                _botCrystals++;
+                BotCrystals++;
                 break;
         }
 
-        crystal.Delete();
+        print($"Player {PlayerCrystals} Bot {BotCrystals}");
+
+        OnCrystalCountChanged?.Invoke(crystal.Team, crystal.Team == Team.Player ? PlayerCrystals : BotCrystals);
     }
 
     public bool CanSpend(Team team)
@@ -41,9 +44,9 @@ public class LevelData : MonoBehaviour
             case Team.Empty:
                 return false;
             case Team.Player:
-                return _playerCrystals > 0;
+                return PlayerCrystals > 0;
             case Team.Enemy:
-                return _botCrystals > 0;
+                return BotCrystals > 0;
             default:
                 return false;
         }
@@ -55,14 +58,17 @@ public class LevelData : MonoBehaviour
         switch (team)
         {
             case Team.Empty:
-                break;
+                return;
             case Team.Player:
-                _playerCrystals--;
+                PlayerCrystals--;
                 break;
             case Team.Enemy:
-                _botCrystals--;
+                BotCrystals--;
                 break;
         }
+
+        OnCrystalCountChanged?.Invoke(team, team == Team.Player ? PlayerCrystals : BotCrystals);
+
         _road._defaultLength++;
         _road._spiral.Count = Mathf.Max(_road._spiral.Count, _road._defaultLength);
     }

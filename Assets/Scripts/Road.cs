@@ -12,13 +12,21 @@ public class Road : MonoBehaviour
     [SerializeField] public Dictionary _dictionary = null;
     [SerializeField] public DrawSpiral _spiral = null;
     [SerializeField] public int _defaultLength = 25;
+
+    [Header("Final")]
     [SerializeField] public TextMeshProUGUI _finalLabel = null;
     [SerializeField] public GameObject _reloadSceneButton = null;
-    [SerializeField] private LetterBlock[] _blocks = null;
 
-    private Team _round = Team.Player;
+    [Header("Crystals")]
+    [SerializeField] private GameObject _crystalPrefab = null;
+    [SerializeField] private int _crystalCount = 8;
+    [SerializeField] private int _startOffset = 3;
+    [SerializeField] private int _endOffset = 3;
+
     [HideInInspector] public List<string> _words = new List<string>();
 
+    public Team Round { get; private set; } = Team.Player;
+    private LetterBlock[] _blocks = null;
 
     private int ChainLength
     {
@@ -65,18 +73,31 @@ public class Road : MonoBehaviour
     private void Start()
     {
         _spiral.Count = _defaultLength;
-        StartCoroutine(Utils.DelayedCall(1f, () => BeginRound(_round)));
+        StartCoroutine(Utils.DelayedCall(1f, () => BeginRound(Round)));
+
+        List<LetterBlock> blocks = new List<LetterBlock>();
+        for (int i = _startOffset; i < _defaultLength - _endOffset; i++)
+            blocks.Add(_blocks[i]);
+
+        for(int i = 0; i < _crystalCount && blocks.Count > 0; i++)
+        {
+            int index = Random.Range(0, blocks.Count);
+            CrystalBonus crystal = Instantiate(_crystalPrefab, blocks[index].transform).GetComponent<CrystalBonus>();
+            crystal.Road = this;
+            blocks[index].Bonus = crystal;
+            blocks.RemoveAt(index);
+        }
     }
 
     public void NextRound()
     {
-        if (_round == Team.Player) _round = Team.Enemy;
-        else _round = Team.Player;
+        if (Round == Team.Player) Round = Team.Enemy;
+        else Round = Team.Player;
     }
 
     private void BeginRound(Team round)
     {
-        if (_round == Team.Player)
+        if (Round == Team.Player)
         {
             _playerPanel.Visible = true;
         }
@@ -114,7 +135,7 @@ public class Road : MonoBehaviour
     {
         string word = Word;
         _inputWord = string.Empty;
-        if (_round == Team.Player)
+        if (Round == Team.Player)
         {
             if (!CheckWord(word))
             {
@@ -153,7 +174,7 @@ public class Road : MonoBehaviour
             int index = i - oldChainLength;
             LetterBlock block = _blocks[i];
             block.Letter = word[index].ToString();
-            block.team = _round;
+            block.team = Round;
 
             StartCoroutine(Utils.DelayedCall(0.4f + 0.1f * index, () => block.Show()));
         }
@@ -170,7 +191,7 @@ public class Road : MonoBehaviour
             StartCoroutine(Utils.DelayedCall((chainLength - oldChainLength) * 0.1f + 1f, () =>
             {
                 NextRound();
-                BeginRound(_round);
+                BeginRound(Round);
             }));
         }
 
