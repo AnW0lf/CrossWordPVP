@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Dictionary : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _label = null;
     [SerializeField] private Transform _container = null;
     [SerializeField] private GameObject _emojiPrefab = null;
     [SerializeField] private int _emojiCount = 3;
-    [SerializeField] private Emoji[] _emojis = null;
+    [SerializeField] private Theme[] _themes = null;
 
+    private Theme _theme = null;
+    private Emoji[] _emojies = null;
     private List<InterfaceEmoji> list = new List<InterfaceEmoji>();
 
     public void AddEmoji()
     {
         InterfaceEmoji emoji = Instantiate(_emojiPrefab, _container).GetComponent<InterfaceEmoji>();
-        emoji.Data = _emojis[Random.Range(0, _emojis.Length)];
+        emoji.Data = _emojies[Random.Range(0, _emojies.Length)];
         list.Add(emoji);
     }
 
@@ -46,6 +50,13 @@ public class Dictionary : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void Awake()
+    {
+        _theme = _themes[Random.Range(0, _themes.Length)];
+        _emojies = _theme.Emojies;
+        _label.text = _theme.Name;
     }
 
     private void Start()
