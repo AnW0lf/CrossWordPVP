@@ -44,7 +44,7 @@ public class LetterBlock : MonoBehaviour
                 break;
         }
 
-        LetterColor = Color.black;
+        LetterColor = new Color (1f, 1f, 0f);
 
         Visible = true;
 
