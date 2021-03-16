@@ -20,14 +20,14 @@ public class CrystalCounter : MonoBehaviour
 
     private void CrystalCountChanged(Team team, int count)
     {
-        _counter.text = $"{LevelData.Instance.PlayerCrystals}";
+        _counter.text = $"{LevelData.Instance.PlayerCrystals}<sprite=0>";
     }
 
     private void Start()
     {
         Subscribe();
 
-        _counter.text = $"{LevelData.Instance.PlayerCrystals}";
+        _counter.text = $"{LevelData.Instance.PlayerCrystals}<sprite=0>";
     }
 
     private void OnDestroy()

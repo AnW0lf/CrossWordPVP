@@ -17,7 +17,17 @@ public class CrystalBonus : MonoBehaviour, IBonus
     public void Perform(Team team)
     {
         Team = team;
-        LevelData.Instance.AddCrystal(this);
-        Delete();
+        if (Team == Team.Player)
+        {
+            var crystalCounter = FindObjectOfType<CrystalCounter>();
+            StartCoroutine(Utils.CrossFading(transform.position, crystalCounter.transform.position, 0.5f, (pos) => transform.position = pos, (a, b, c) => Vector3.Lerp(a, b, c)));
+            StartCoroutine(Utils.DelayedCall(0.1f, Delete));
+            StartCoroutine(Utils.DelayedCall(0.5f, () => LevelData.Instance.AddCrystal(this)));
+        }
+        else
+        {
+            Delete();
+            LevelData.Instance.AddCrystal(this);
+        }
     }
 }
