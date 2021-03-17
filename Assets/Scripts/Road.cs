@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -38,11 +37,13 @@ public class Road : MonoBehaviour
         }
     }
 
-    private bool _submitted = false;
+    //private bool _submitted = false;
 
     public void SetBlocks(GameObject[] objects)
     {
         _blocks = objects.Select((o) => o.GetComponent<LetterBlock>()).ToArray();
+        foreach (var block in _blocks) block.IsWinBlock = false;
+        _blocks[_blocks.Length - 1].IsWinBlock = true;
     }
 
     public Transform LastLetterBlock
@@ -160,8 +161,8 @@ public class Road : MonoBehaviour
             if (!CheckWord(word)) return false;
         }
 
-        _submitted = true;
-        StartCoroutine(Utils.DelayedCall(word.Length * 0.1f + 0.8f, () => _submitted = false));
+        //_submitted = true;
+        //StartCoroutine(Utils.DelayedCall(word.Length * 0.1f + 0.8f, () => _submitted = false));
 
         int oldChainLength = ChainLength;
         _words.Add(word.ToLower());
