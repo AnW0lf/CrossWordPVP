@@ -67,7 +67,7 @@ public class LetterBlock : MonoBehaviour
                 break;
         }
 
-        LetterColor = new Color(1f, 1f, 0f);
+        LetterColor = new Color(1f, 0.82f, 0f);
 
         Visible = true;
 
