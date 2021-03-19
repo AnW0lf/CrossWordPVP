@@ -11,7 +11,7 @@ public class MoveCamera : MonoBehaviour
         Transform block = _road.LastLetterBlock;
 
         if (_isRotate)
-            transform.rotation = Quaternion.Lerp(transform.rotation, block.rotation, 0.025f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, block.rotation, 0.04f);
 
         if (_isMove)
         {

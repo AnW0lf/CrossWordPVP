@@ -24,7 +24,7 @@ public class Bot : MonoBehaviour
         {
             i++;
             int index = Random.Range(0, emojies.Count);
-            if (i > 4)
+            if (i > 2)
             {
                 emojies[index].Cast();
                 yield break;
@@ -37,7 +37,7 @@ public class Bot : MonoBehaviour
             }
             else
             {
-                float delay = Random.Range(0.8f, 2.3f);
+                float delay = Random.Range(0.5f, 1.5f);
                 emojies[index].View(delay);
                 yield return new WaitForSeconds(delay + Random.Range(0.2f, 0.5f));
             }
