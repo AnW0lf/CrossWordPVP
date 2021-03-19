@@ -93,17 +93,37 @@ public class Road : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Round == Team.Player && _keyboard != null)
+        {
+            Word = _keyboard.text;
+            if (_keyboard.status == TouchScreenKeyboard.Status.Done)
+            {
+                Submit();
+                _keyboard.active = false;
+                _keyboard = null;
+            }
+        }
+    }
+
     public void NextRound()
     {
         if (Round == Team.Player) Round = Team.Enemy;
         else Round = Team.Player;
     }
 
+    private TouchScreenKeyboard _keyboard = null;
     private void BeginRound(Team round)
     {
         if (Round == Team.Player)
         {
+#if UNITY_STANDALONE
             _playerPanel.Visible = true;
+#elif UNITY_IOS || UNITY_ANDROID
+            TouchScreenKeyboard keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, true, false, false, false);
+            keyboard.characterLimit = 20;
+#endif
         }
         else
         {
