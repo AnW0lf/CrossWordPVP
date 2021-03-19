@@ -13,8 +13,9 @@ public class Road : MonoBehaviour
     [SerializeField] public int _defaultLength = 25;
 
     [Header("Final")]
-    [SerializeField] public TextMeshProUGUI _finalLabel = null;
-    [SerializeField] public GameObject _reloadSceneButton = null;
+    [SerializeField] public RectTransform _topPanel = null;
+    [SerializeField] public GameObject _victoryScreen = null;
+    [SerializeField] public GameObject _defeatScreen = null;
 
     [Header("Crystals")]
     [SerializeField] private GameObject _crystalPrefab = null;
@@ -37,7 +38,7 @@ public class Road : MonoBehaviour
         }
     }
 
-    //private bool _submitted = false;
+    public bool Submitted { get; private set; } = false;
 
     public void SetBlocks(GameObject[] objects)
     {
@@ -80,7 +81,7 @@ public class Road : MonoBehaviour
         for (int i = _startOffset; i < _defaultLength - _endOffset; i++)
             blocks.Add(_blocks[i]);
 
-        for(int i = 0; i < _crystalCount && blocks.Count > 0; i++)
+        for (int i = 0; i < _crystalCount && blocks.Count > 0; i++)
         {
             int index = Random.Range(0, blocks.Count);
             CrystalBonus crystal = Instantiate(_crystalPrefab, blocks[index].transform).GetComponent<CrystalBonus>();
@@ -161,8 +162,8 @@ public class Road : MonoBehaviour
             if (!CheckWord(word)) return false;
         }
 
-        //_submitted = true;
-        //StartCoroutine(Utils.DelayedCall(word.Length * 0.1f + 0.8f, () => _submitted = false));
+        Submitted = true;
+        StartCoroutine(Utils.DelayedCall(word.Length * 0.1f + 1f, () => Submitted = false));
 
         int oldChainLength = ChainLength;
         _words.Add(word.ToLower());
@@ -182,10 +183,14 @@ public class Road : MonoBehaviour
 
         if (CheckWin())
         {
-            StartCoroutine(Utils.DelayedCall(2f, () => _reloadSceneButton.SetActive(true)));
+            IsLevelEnd = true;
 
-            if (_blocks[_blocks.Length - 1].team == Team.Player) _finalLabel.text = "VICTORY";
-            else _finalLabel.text = "DEFEAT";
+            StartCoroutine(Utils.CrossFading(_topPanel.anchoredPosition, Vector2.up * 500f, 0.3f, (pos) => _topPanel.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
+
+            if (Round == Team.Player)
+                StartCoroutine(Utils.DelayedCall(1.5f, () => _victoryScreen.SetActive(true)));
+            else
+                StartCoroutine(Utils.DelayedCall(1.5f, () => _defeatScreen.SetActive(true)));
         }
         else
         {
@@ -200,6 +205,8 @@ public class Road : MonoBehaviour
     }
 
     private bool CheckWin() => _blocks[_blocks.Length - 1].Letter != string.Empty;
+
+    public bool IsLevelEnd { get; private set; } = false;
 
     private bool CheckWord(string word) => _dictionary.CheckWord(word);
 
