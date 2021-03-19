@@ -32,7 +32,7 @@ public class Dictionary : MonoBehaviour
             }
         }
 
-        emoji.Data = available[Random.Range(0, _emojies.Length)];
+        emoji.Data = available[Random.Range(0, available.Count)];
         list.Add(emoji);
     }
 
