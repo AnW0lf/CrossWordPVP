@@ -96,6 +96,7 @@ public class LetterBlock : MonoBehaviour
         if (IsWinBlock && !effectVisible)
         {
             effectVisible = true;
+            StartCoroutine(Utils.DelayedCall(2f, () => effectVisible = false));
             Instantiate(_confettiPrefab, transform).transform.position = transform.position;
         }
     }
