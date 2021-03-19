@@ -10,6 +10,7 @@ public class Road : MonoBehaviour
     [SerializeField] public Dictionary _dictionary = null;
     [SerializeField] public DrawSpiral _spiral = null;
     [SerializeField] public int _defaultLength = 25;
+    [SerializeField] public bool _preview = false;
 
     [Header("Final")]
     [SerializeField] public GameObject _victoryScreen = null;
@@ -132,19 +133,22 @@ public class Road : MonoBehaviour
         set
         {
             _inputWord = value;
-            int chainLength = ChainLength;
 
-            _spiral.Count = Mathf.Max(_defaultLength, chainLength + Word.Length);
 
-            for (int i = chainLength; i < _blocks.Length; i++)
+            if (_preview)
             {
-                int index = i - chainLength;
-                LetterBlock block = _blocks[i];
-                if (index < Word.Length)
-                    block.Letter = Word[index].ToString();
-                else
-                    block.Letter = string.Empty;
-                block.IsWinBlock = i >= _defaultLength - 1;
+                int chainLength = ChainLength;
+                _spiral.Count = Mathf.Max(_defaultLength, chainLength + Word.Length);
+                for (int i = chainLength; i < _blocks.Length; i++)
+                {
+                    int index = i - chainLength;
+                    LetterBlock block = _blocks[i];
+                    if (index < Word.Length)
+                        block.Letter = Word[index].ToString();
+                    else
+                        block.Letter = string.Empty;
+                    block.IsWinBlock = i >= _defaultLength - 1;
+                }
             }
         }
     }
@@ -190,10 +194,14 @@ public class Road : MonoBehaviour
         {
             int index = i - oldChainLength;
             LetterBlock block = _blocks[i];
-            block.Letter = word[index].ToString();
-            block.team = Round;
 
-            StartCoroutine(Utils.DelayedCall(0.4f + 0.1f * index, () => block.Show()));
+            StartCoroutine(Utils.DelayedCall(0.4f + 0.1f * index,
+                () =>
+                {
+                    block.Letter = word[index].ToString();
+                    block.team = Round;
+                    block.Show();
+                }));
         }
 
         if (CheckWin())
@@ -232,7 +240,12 @@ public class Road : MonoBehaviour
         return true;
     }
 
-    private bool CheckWin() => _blocks[_blocks.Length - 1].Letter != string.Empty;
+    private bool CheckWin()
+    {
+        int wordsLength = 0;
+        foreach (var word in _words) wordsLength += word.Length;
+        return wordsLength >= _blocks.Length;
+    }
 
     public bool IsLevelEnd { get; private set; } = false;
 
