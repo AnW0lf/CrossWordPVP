@@ -5907,7 +5907,7 @@ MonoBehaviour:
   _bot: {fileID: 932100389}
   _dictionary: {fileID: 216836816}
   _spiral: {fileID: 1715142723}
-  _defaultLength: 25
+  _defaultLength: 26
   _preview: 1
   _victoryScreen: {fileID: 502236884}
   _defeatScreen: {fileID: 1696990186}

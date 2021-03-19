@@ -145,10 +145,10 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
         _outline.enabled = true;
         _road.Word = _data.Words[0];
 
-        float delay = Random.Range(0.3f, 0.7f);
+        float delay = Random.Range(0.2f, 0.5f);
         Vector2 startPos = _outline.rectTransform.anchoredPosition;
         Vector2 endPos = startPos + Vector2.up * 400f;
-        float duration = Random.Range(0.3f, 0.8f);
+        float duration = Random.Range(0.1f, 0.3f);
 
 
         StartCoroutine(Utils.DelayedCrossFading(delay, startPos, endPos, duration, (pos) => _outline.rectTransform.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
