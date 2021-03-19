@@ -8,10 +8,10 @@ public class Bot : MonoBehaviour
 
     public void Begin()
     {
-        while (LevelData.Instance.CanSpend(Team.Enemy) && Random.Range(0f, 1f) > 0.5f)
-        {
-            LevelData.Instance.Spend(Team.Enemy);
-        }
+        //while (LevelData.Instance.CanSpend(Team.Enemy) && Random.Range(0f, 1f) > 0.5f)
+        //{
+        //    LevelData.Instance.Spend(Team.Enemy);
+        //}
 
         StartCoroutine(ChooseWord());
     }
