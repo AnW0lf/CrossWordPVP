@@ -44,7 +44,7 @@ public class CrystalBonus : MonoBehaviour, IBonus
     private IEnumerator UpDown()
     {
         if (_performed) yield break;
-        yield return new WaitForSeconds(Random.Range(2f, 7f));
+        yield return new WaitForSeconds(Random.Range(0f, 1f));
         if (_performed) yield break;
         StartCoroutine(Utils.CrossFading(_body.localPosition, _body.localPosition + Vector3.up * 0.1f, 1f, (pos) => _body.localPosition = pos, (a, b, c) => Vector3.Lerp(a, b, c)));
         yield return StartCoroutine(Utils.CrossFading(_shadow.localScale, _shadow.localScale - Vector3.one * 0.1f, 1f, (scale) => _shadow.localScale = scale, (a, b, c) => Vector3.Lerp(a, b, c)));
@@ -52,7 +52,7 @@ public class CrystalBonus : MonoBehaviour, IBonus
         StartCoroutine(Utils.CrossFading(_body.localPosition, _body.localPosition + Vector3.down * 0.1f, 1f, (pos) => _body.localPosition = pos, (a, b, c) => Vector3.Lerp(a, b, c)));
         yield return StartCoroutine(Utils.CrossFading(_shadow.localScale, _shadow.localScale + Vector3.one * 0.1f, 1f, (scale) => _shadow.localScale = scale, (a, b, c) => Vector3.Lerp(a, b, c)));
         if (_performed) yield break;
-        yield return new WaitForSeconds(Random.Range(0f, 3f));
+        yield return new WaitForSeconds(Random.Range(0f, 1f));
         StartCoroutine(UpDown());
     }
 

@@ -71,7 +71,7 @@ Material:
     - _OcclusionStrength: 1
     - _Offset1: 0
     - _Offset2: 0
-    - _Outline: 5
+    - _Outline: -2.86
     - _Parallax: 0.02
     - _RampSmooth: 0.001
     - _RampThreshold: 0.5
@@ -87,11 +87,11 @@ Material:
     - __dummy__: 0
     - __outline_gui_dummy__: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.57535654, b: 0, a: 1}
+    - _Color: {r: 0, g: 0.38204694, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0.055446286, b: 0.11320752, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SColor: {r: 0.7075472, g: 0.6840353, b: 0, a: 1}
+    - _SColor: {r: 0, g: 0.15431, b: 0.4056604, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
