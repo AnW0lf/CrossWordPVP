@@ -66,11 +66,11 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
         float y = _outline.rectTransform.anchoredPosition.y;
 
         Color color = _icon.color;
-        color.a = Mathf.Lerp(1f, 0f, Mathf.Clamp(y / 400f, 0f, 1f));
+        color.a = Mathf.Lerp(1f, 0f, Mathf.Clamp(y / 600f, 0f, 1f));
         _icon.color = color;
 
         color = _outline.color;
-        color.a = Mathf.Lerp(1f, 0f, Mathf.Clamp(y / 400f, 0f, 1f));
+        color.a = Mathf.Lerp(1f, 0f, Mathf.Clamp(y / 600f, 0f, 1f));
         _outline.color = color;
     }
 

@@ -19,9 +19,17 @@ public class Bot : MonoBehaviour
     private IEnumerator ChooseWord()
     {
         List<InterfaceEmoji> emojies = _road._dictionary.Emojies;
+        int i = 0;
         while (true)
         {
+            i++;
             int index = Random.Range(0, emojies.Count);
+            if (i > 4)
+            {
+                emojies[index].Cast();
+                yield break;
+            }
+
             if (Random.Range(0f, 1f) > 0.5f)
             {
                 emojies[index].Cast();

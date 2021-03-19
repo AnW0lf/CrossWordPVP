@@ -63,10 +63,10 @@ public class Road : MonoBehaviour
             //}
             //else
             //{
-            if (_blocks[0].Letter == string.Empty) return _blocks[0].transform;
+            if (!_blocks[0].Visible) return _blocks[0].transform;
 
             for (int i = 0; i < _blocks.Length; i++)
-                if (_blocks[i].Letter == string.Empty) return _blocks[i - 1].transform;
+                if (!_blocks[i].Visible) return _blocks[i - 1].transform;
 
             return _blocks[_blocks.Length - 1].transform;
             //}
@@ -215,7 +215,7 @@ public class Road : MonoBehaviour
                     }
                 }));
 
-                StartCoroutine(Utils.DelayedCall(_blocks.Length * 0.1f + 2.2f, () => _victoryScreen.SetActive(true)));
+                StartCoroutine(Utils.DelayedCall(_blocks.Length * 0.1f + 2f, () => _victoryScreen.SetActive(true)));
             }
             else
                 StartCoroutine(Utils.DelayedCall(1f, () => _defeatScreen.SetActive(true)));
