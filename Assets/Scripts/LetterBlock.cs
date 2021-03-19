@@ -11,6 +11,8 @@ public class LetterBlock : MonoBehaviour
     [SerializeField] private Material _enemyMaterial = null;
     [SerializeField] private Material _winMaterial = null;
     [SerializeField] private GameObject _confettiPrefab = null;
+    [SerializeField] private Transform _coin = null;
+    [SerializeField] private Transform _body = null;
 
     public Team team = Team.Empty;
     public string Letter
@@ -61,6 +63,12 @@ public class LetterBlock : MonoBehaviour
 
     private static bool effectVisible = false;
 
+    private void Start()
+    {
+        StartCoroutine(Utils.CrossFading(Vector3.zero, Vector3.one, 0.3f,
+            (scale) => transform.localScale = scale, (a, b, c) => Vector3.Lerp(a, b, c)));
+    }
+
     public void Show()
     {
         switch (team)
@@ -85,10 +93,44 @@ public class LetterBlock : MonoBehaviour
             Bonus.Perform(team);
         }
 
-        if(IsWinBlock && !effectVisible)
+        if (IsWinBlock && !effectVisible)
         {
             effectVisible = true;
             Instantiate(_confettiPrefab, transform).transform.position = transform.position;
         }
+    }
+
+    public void FlyTo(RewardCounter counter)
+    {
+        _coin.gameObject.SetActive(true);
+        _coin.LookAt(Camera.main.transform);
+
+        float duration = Vector3.Distance(_coin.position, counter.IconPosition) / 20f;
+
+        StartCoroutine(Utils.DelayedCrossFading(0.2f, _coin.position, counter.IconPosition, duration,
+            (pos) =>
+            {
+                _coin.position = pos;
+                _coin.LookAt(Camera.main.transform);
+            }, (a, b, c) => Vector3.Lerp(a, b, c)));
+
+        StartCoroutine(Utils.DelayedCrossFading(0.2f, _body.position, _body.position + Vector3.down * 10f, 3f,
+            (pos) => _body.position = pos, (a, b, c) => Vector3.Lerp(a, b, c)));
+
+        StartCoroutine(Utils.DelayedCrossFading(0.2f, _label.color.a, 0f, 0.3f,
+            (alpha) => {
+                Color color = _label.color;
+                color.a = alpha;
+                _label.color = color;
+            }, (a, b, c) => Mathf.Lerp(a, b, c)));
+
+        StartCoroutine(Utils.DelayedCrossFading(duration, _coin.localScale, Vector3.zero, 0.2f, (scale) => _coin.localScale = scale, (a, b, c) => Vector3.Lerp(a, b, c)));
+
+        StartCoroutine(Utils.DelayedCall(0.3f + duration,
+            () =>
+            {
+                _coin.gameObject.SetActive(false);
+                counter.Count++;
+            }));
     }
 }

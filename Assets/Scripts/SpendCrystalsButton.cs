@@ -19,7 +19,7 @@ public class SpendCrystalsButton : MonoBehaviour
             _visibe = value;
 
             if (_moving != null) StopCoroutine(_moving);
-            _moving = StartCoroutine(Utils.CrossFading(_rect.anchoredPosition, Visible ? Vector2.zero : Vector2.right * 1000f, 0.4f,
+            _moving = StartCoroutine(Utils.CrossFading(_rect.anchoredPosition, Visible ? Vector2.zero : Vector2.right * 1000f, 0.27f,
                                                        (pos) => _rect.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
         }
     }
@@ -55,7 +55,7 @@ public class SpendCrystalsButton : MonoBehaviour
         _button.interactable = LevelData.Instance.CanSpend(Team.Player);
         Subscribe();
 
-        Visible = _road.Round == Team.Player;
+        Visible = _road.Round == Team.Player && !_road.Submitted && !_road.IsLevelEnd;
     }
 
     private void OnDestroy()
@@ -65,7 +65,7 @@ public class SpendCrystalsButton : MonoBehaviour
 
     private void Update()
     {
-        if(_road.Round == Team.Player)
+        if(_road.Round == Team.Player && !_road.Submitted && !_road.IsLevelEnd)
         {
             if (!Visible) Visible = true;
         }

@@ -16,6 +16,8 @@ public class Road : MonoBehaviour
     [SerializeField] public RectTransform _topPanel = null;
     [SerializeField] public GameObject _victoryScreen = null;
     [SerializeField] public GameObject _defeatScreen = null;
+    [SerializeField] public RewardCounter _rewardCounter = null;
+
 
     [Header("Crystals")]
     [SerializeField] private GameObject _crystalPrefab = null;
@@ -188,9 +190,22 @@ public class Road : MonoBehaviour
             StartCoroutine(Utils.CrossFading(_topPanel.anchoredPosition, Vector2.up * 500f, 0.3f, (pos) => _topPanel.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
 
             if (Round == Team.Player)
-                StartCoroutine(Utils.DelayedCall(2f, () => _victoryScreen.SetActive(true)));
+            {
+                StartCoroutine(Utils.DelayedCall(1.5f, () =>
+                {
+                    _rewardCounter.gameObject.SetActive(true);
+                    for (int i = 0; i < _blocks.Length; i++)
+                    {
+                        LetterBlock block = _blocks[i];
+                        float delay = 0.1f * i;
+                        StartCoroutine(Utils.DelayedCall(delay, () => block.FlyTo(_rewardCounter)));
+                    }
+                }));
+
+                StartCoroutine(Utils.DelayedCall(_blocks.Length * 0.1f + 2.2f, () => _victoryScreen.SetActive(true)));
+            }
             else
-                StartCoroutine(Utils.DelayedCall(2f, () => _defeatScreen.SetActive(true)));
+                StartCoroutine(Utils.DelayedCall(1f, () => _defeatScreen.SetActive(true)));
         }
         else
         {
