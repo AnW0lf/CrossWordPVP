@@ -6,6 +6,7 @@ public class CrystalBonus : MonoBehaviour, IBonus
 {
     [SerializeField] private Transform _body = null;
     [SerializeField] private Transform _shadow = null;
+    [SerializeField] private float _rotationAngle = 30f;
 
     public Team Team { get; set; } = Team.Empty;
     public Road Road { get; set; } = null;
@@ -58,5 +59,10 @@ public class CrystalBonus : MonoBehaviour, IBonus
     private void Start()
     {
         StartCoroutine(UpDown());
+    }
+
+    private void Update()
+    {
+        _body.Rotate(Vector3.up * Time.deltaTime * _rotationAngle, Space.World);
     }
 }
