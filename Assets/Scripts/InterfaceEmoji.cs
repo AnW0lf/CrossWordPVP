@@ -85,14 +85,14 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
 
         if (_moving != null) StopCoroutine(_moving);
 
-        _startPos = eventData.position;
+        _startPos = Input.mousePosition;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (_road.Round != Team.Player) return;
 
-        float y = Mathf.Max(0f, eventData.position.y - _startPos.y);
+        float y = Mathf.Max(0f, Input.mousePosition.y - _startPos.y) / Screen.height * 2160f;
 
         Vector2 position = _outline.rectTransform.anchoredPosition;
         position.y = y;
