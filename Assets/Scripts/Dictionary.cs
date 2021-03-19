@@ -22,6 +22,8 @@ public class Dictionary : MonoBehaviour
         list.Add(emoji);
     }
 
+    public List<InterfaceEmoji> Emojies => new List<InterfaceEmoji>(list);
+
     public bool DeleteAt(int index)
     {
         if (index > 0 && index <= list.Count)
@@ -79,5 +81,15 @@ public class Dictionary : MonoBehaviour
         foreach(var emoji in list)
             words.AddRange(emoji.Data.Words);
         return words[Random.Range(0, words.Count)];
+    }
+
+    public void Hide()
+    {
+        StartCoroutine(Utils.CrossFading(_label.rectTransform.anchoredPosition, _label.rectTransform.anchoredPosition + Vector2.up * 1000f, 1f,
+            (pos) => _label.rectTransform.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
+
+        RectTransform containerRect = _container.GetComponent<RectTransform>();
+        StartCoroutine(Utils.CrossFading(containerRect.anchoredPosition, containerRect.anchoredPosition + Vector2.down * 1000f, 1f,
+            (pos) => containerRect.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
     }
 }

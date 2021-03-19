@@ -6,17 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class Road : MonoBehaviour
 {
-    [SerializeField] private AnimatedPanel _playerPanel = null;
     [SerializeField] private Bot _bot = null;
     [SerializeField] public Dictionary _dictionary = null;
     [SerializeField] public DrawSpiral _spiral = null;
     [SerializeField] public int _defaultLength = 25;
 
     [Header("Final")]
-    [SerializeField] public RectTransform _topPanel = null;
     [SerializeField] public GameObject _victoryScreen = null;
     [SerializeField] public GameObject _defeatScreen = null;
     [SerializeField] public RewardCounter _rewardCounter = null;
+    [SerializeField] public CrystalCounter _crystalCounter = null;
 
 
     [Header("Crystals")]
@@ -118,12 +117,7 @@ public class Road : MonoBehaviour
     {
         if (Round == Team.Player)
         {
-#if UNITY_STANDALONE
-            _playerPanel.Visible = true;
-#elif UNITY_IOS || UNITY_ANDROID
-            TouchScreenKeyboard keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, true, false, false, false);
-            keyboard.characterLimit = 20;
-#endif
+
         }
         else
         {
@@ -177,7 +171,6 @@ public class Road : MonoBehaviour
 
                 return false;
             }
-            _playerPanel.Visible = false;
         }
         else
         {
@@ -206,8 +199,8 @@ public class Road : MonoBehaviour
         if (CheckWin())
         {
             IsLevelEnd = true;
-
-            StartCoroutine(Utils.CrossFading(_topPanel.anchoredPosition, Vector2.up * 500f, 0.3f, (pos) => _topPanel.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
+            _dictionary.Hide();
+            _crystalCounter.Hide();
 
             if (Round == Team.Player)
             {

@@ -19,7 +19,7 @@ public class SpendCrystalsButton : MonoBehaviour
             _visibe = value;
 
             if (_moving != null) StopCoroutine(_moving);
-            _moving = StartCoroutine(Utils.CrossFading(_rect.anchoredPosition, Visible ? Vector2.zero : Vector2.right * 1000f, 0.27f,
+            _moving = StartCoroutine(Utils.CrossFading(_rect.anchoredPosition, Visible ? Vector2.zero : Vector2.left * 500f, 0.27f,
                                                        (pos) => _rect.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
         }
     }

@@ -8,7 +8,7 @@ public class RewardCounter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _counter = null;
     [SerializeField] private RectTransform _icon = null;
 
-    public Vector3 IconPosition => _icon.transform.position + Vector3.left * 0.6f;
+    public Vector3 IconPosition => _icon.transform.position + Vector3.left;
 
     private int _count = 0;
     public int Count

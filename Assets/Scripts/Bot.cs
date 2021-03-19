@@ -1,43 +1,38 @@
-using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bot : MonoBehaviour
 {
     [SerializeField] private Road _road = null;
 
-    private float _chance = 0f;
-
-    private void Start()
-    {
-        _chance = Random.Range(0f, 0.3f);
-    }
-
     public void Begin()
     {
-        string word = string.Empty;
-
-        while(LevelData.Instance.CanSpend(Team.Enemy) && Random.Range(0f, 1f) > 0.5f)
+        while (LevelData.Instance.CanSpend(Team.Enemy) && Random.Range(0f, 1f) > 0.5f)
         {
             LevelData.Instance.Spend(Team.Enemy);
         }
 
-        if(Random.Range(0f, 1f) > _chance)
-        {
-            word = _road._dictionary.GetDefaultWord();
-        }
-        else
-        {
-            word = _road._dictionary.GetRandomWord();
-        }
+        StartCoroutine(ChooseWord());
+    }
 
-        float delay = Random.Range(1.5f, 3f);
-        StartCoroutine(Utils.CrossFading(string.Empty, word, delay, (str) => _road.Word = str,
-            (a, b, c) =>
+    private IEnumerator ChooseWord()
+    {
+        List<InterfaceEmoji> emojies = _road._dictionary.Emojies;
+        while (true)
+        {
+            int index = Random.Range(0, emojies.Count);
+            if (Random.Range(0f, 1f) > 0.5f)
             {
-                int length = Mathf.RoundToInt(Mathf.Lerp(0f, (float) word.Length, c));
-                return word.Substring(0, length);
-            }));
-
-        StartCoroutine(Utils.DelayedCall(delay + 0.5f, () => _road.Submit()));
+                emojies[index].Cast();
+                yield break;
+            }
+            else
+            {
+                float delay = Random.Range(0.8f, 2.3f);
+                emojies[index].View(delay);
+                yield return new WaitForSeconds(delay + Random.Range(0.2f, 0.5f));
+            }
+        }
     }
 }
