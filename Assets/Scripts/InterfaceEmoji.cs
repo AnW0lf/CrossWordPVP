@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -65,13 +66,13 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
     {
         float y = _outline.rectTransform.anchoredPosition.y;
 
-        Color color = _icon.color;
-        color.a = Mathf.Lerp(1f, 0f, Mathf.Clamp(y / 600f, 0f, 1f));
-        _icon.color = color;
-
-        color = _outline.color;
-        color.a = Mathf.Lerp(1f, 0f, Mathf.Clamp(y / 600f, 0f, 1f));
-        _outline.color = color;
+        Image[] images = GetComponentsInChildren<Image>();
+        foreach (var image in images)
+        {
+            Color color = image.color;
+            color.a = Mathf.Lerp(1f, 0f, Mathf.Clamp(y / 600f, 0f, 1f));
+            image.color = color;
+        }
     }
 
     private Coroutine _moving = null;

@@ -32,8 +32,6 @@ public class LevelData : MonoBehaviour
                 break;
         }
 
-        print($"Player {PlayerCrystals} Bot {BotCrystals}");
-
         OnCrystalCountChanged?.Invoke(crystal.Team, crystal.Team == Team.Player ? PlayerCrystals : BotCrystals);
     }
 
