@@ -188,9 +188,9 @@ public class Road : MonoBehaviour
             StartCoroutine(Utils.CrossFading(_topPanel.anchoredPosition, Vector2.up * 500f, 0.3f, (pos) => _topPanel.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
 
             if (Round == Team.Player)
-                StartCoroutine(Utils.DelayedCall(1.5f, () => _victoryScreen.SetActive(true)));
+                StartCoroutine(Utils.DelayedCall(2f, () => _victoryScreen.SetActive(true)));
             else
-                StartCoroutine(Utils.DelayedCall(1.5f, () => _defeatScreen.SetActive(true)));
+                StartCoroutine(Utils.DelayedCall(2f, () => _defeatScreen.SetActive(true)));
         }
         else
         {

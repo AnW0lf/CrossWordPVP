@@ -10,6 +10,7 @@ public class LetterBlock : MonoBehaviour
     [SerializeField] private Material _playerMaterial = null;
     [SerializeField] private Material _enemyMaterial = null;
     [SerializeField] private Material _winMaterial = null;
+    [SerializeField] private GameObject _confettiPrefab = null;
 
     public Team team = Team.Empty;
     public string Letter
@@ -58,6 +59,8 @@ public class LetterBlock : MonoBehaviour
 
     public bool Visible { get; private set; } = false;
 
+    private static bool effectVisible = false;
+
     public void Show()
     {
         switch (team)
@@ -66,11 +69,9 @@ public class LetterBlock : MonoBehaviour
                 _renderer.material = _emptyMaterial;
                 break;
             case Team.Player:
-                //_renderer.material = IsWinBlock ? _winMaterial : _playerMaterial;
                 _renderer.material = _playerMaterial;
                 break;
             case Team.Enemy:
-                //_renderer.material = IsWinBlock ? _winMaterial : _enemyMaterial;
                 _renderer.material = _enemyMaterial;
                 break;
         }
@@ -82,6 +83,12 @@ public class LetterBlock : MonoBehaviour
         if (Bonus != null)
         {
             Bonus.Perform(team);
+        }
+
+        if(IsWinBlock && !effectVisible)
+        {
+            effectVisible = true;
+            Instantiate(_confettiPrefab, transform).transform.position = transform.position;
         }
     }
 }
