@@ -45,7 +45,7 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
     public void Delete()
     {
         StartCoroutine(Utils.CrossFading(_size, Vector2.zero, 0.4f, (size) => _rect.sizeDelta = size, (a, b, c) => Vector2.Lerp(a, b, c)));
-        StartCoroutine(Utils.DelayedCall(0.45f, () => Destroy(gameObject)));
+        StartCoroutine(Utils.DelayedCall(0.5f, () => Destroy(gameObject)));
     }
 
     private void Awake()

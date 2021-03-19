@@ -18,7 +18,21 @@ public class Dictionary : MonoBehaviour
     public void AddEmoji()
     {
         InterfaceEmoji emoji = Instantiate(_emojiPrefab, _container).GetComponent<InterfaceEmoji>();
-        emoji.Data = _emojies[Random.Range(0, _emojies.Length)];
+        List<Emoji> available = new List<Emoji>(_emojies);
+
+        for(int i = available.Count - 1; i >= 0; i--)
+        {
+            foreach(var l in list)
+            {
+                if(l.Data.Words[0] == available[i].Words[0])
+                {
+                    available.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
+        emoji.Data = available[Random.Range(0, _emojies.Length)];
         list.Add(emoji);
     }
 
