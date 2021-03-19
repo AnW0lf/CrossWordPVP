@@ -9,7 +9,7 @@ public class LetterBlock : MonoBehaviour
     [SerializeField] private Material _emptyMaterial = null;
     [SerializeField] private Material _playerMaterial = null;
     [SerializeField] private Material _enemyMaterial = null;
-    //[SerializeField] private Material _winMaterial = null;
+    [SerializeField] private Material _winMaterial = null;
 
     public Team team = Team.Empty;
     public string Letter
@@ -45,6 +45,14 @@ public class LetterBlock : MonoBehaviour
         {
             _isWinBlock = value;
             _star.SetActive(_isWinBlock && _label.text == string.Empty);
+
+            if (!Visible)
+            {
+                if (IsWinBlock)
+                    _renderer.material = _winMaterial;
+                else
+                    _renderer.material = _emptyMaterial;
+            }
         }
     }
 

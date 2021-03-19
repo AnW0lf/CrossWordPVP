@@ -240,12 +240,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b2faa00dce035f4c98d033a65995d72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d75739c4c72db041a8f5e1f38bac6ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2.13, y: 2.13}
+  m_Size: {x: 0.7, y: 0.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -303,6 +303,7 @@ MonoBehaviour:
   _emptyMaterial: {fileID: 2100000, guid: 1ed57ff3e5cacde4d8053fd2180eee91, type: 2}
   _playerMaterial: {fileID: 2100000, guid: 16e4135c69b33304aa56a0374300f7b6, type: 2}
   _enemyMaterial: {fileID: 2100000, guid: 1a97454c066c9a240a0ada0a8567c3b0, type: 2}
+  _winMaterial: {fileID: 2100000, guid: 90ee563ed14b49a4e9c9b679457f91c8, type: 2}
   team: 0
 --- !u!1 &5006783920581433767
 GameObject:
