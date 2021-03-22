@@ -8,6 +8,8 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
 {
     [SerializeField] private Image _icon = null;
     [SerializeField] private Image _outline = null;
+    [SerializeField] private Color _normalColor = Color.white;
+    [SerializeField] private Color _fadeColor = Color.grey;
     private RectTransform _rect = null;
     private Vector2 _size = Vector2.zero;
     private Emoji _data = null;
@@ -62,9 +64,16 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
         _road = FindObjectOfType<Road>();
     }
 
+    private Team Round => _road.Round;
+
     private void Update()
     {
         float y = _outline.rectTransform.anchoredPosition.y;
+
+        if(Round == Team.Player) 
+            _icon.color = CrossfadeColor(_normalColor, _icon.color.a);
+        else
+            _icon.color = CrossfadeColor(_fadeColor, _icon.color.a);
 
         Image[] images = GetComponentsInChildren<Image>();
         foreach (var image in images)
@@ -79,6 +88,13 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
 
     Vector2 _startPos = Vector2.zero;
 
+    private Color CrossfadeColor(Color target, float alpha)
+    {
+        Color color = _icon.color;
+        color = Color.Lerp(color, target, 0.2f);
+        color.a = alpha;
+        return color;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
