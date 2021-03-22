@@ -57,20 +57,28 @@ public class InterfaceEmoji : MonoBehaviour, IDragHandler, IBeginDragHandler, IP
     }
 
     private Road _road = null;
+    private Team _round = Team.Empty;
 
     private void Start()
     {
         Show();
         _road = FindObjectOfType<Road>();
+        _round = _road.Round;
     }
 
-    private Team Round => _road.Round;
 
     private void Update()
     {
         float y = _outline.rectTransform.anchoredPosition.y;
 
-        if(Round == Team.Player) 
+        if (_road.Submitted)
+        {
+            if (_road.Round == Team.Player) _round = Team.Enemy;
+            if (_road.Round == Team.Enemy) _round = Team.Player;
+        }
+        else _round = _road.Round;
+
+        if(_round == Team.Player) 
             _icon.color = CrossfadeColor(_normalColor, _icon.color.a);
         else
             _icon.color = CrossfadeColor(_fadeColor, _icon.color.a);
