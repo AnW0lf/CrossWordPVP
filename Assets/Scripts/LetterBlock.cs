@@ -131,7 +131,7 @@ public class LetterBlock : MonoBehaviour
             () =>
             {
                 _coin.gameObject.SetActive(false);
-                counter.Count++;
+                counter.Count += LevelData.Instance.PlayerCrystals + 1;
             }));
     }
 }
