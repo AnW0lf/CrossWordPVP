@@ -9,6 +9,6 @@ public class WinPrizeCounter : MonoBehaviour
 
     void Update()
     {
-        _label.text = $"Win prize x{LevelData.Instance.PlayerCrystals + 1}";
+        _label.text = $"Victory Prize: <color=#ffff00><size=100>X{LevelData.Instance.PlayerCrystals + 1}</size></color>";
     }
 }
