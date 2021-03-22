@@ -6,6 +6,7 @@ using UnityEngine;
 public class Dictionary : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _label = null;
+    [SerializeField] private TextMeshProUGUI _winPrize = null;
     [SerializeField] private Transform _container = null;
     [SerializeField] private GameObject _emojiPrefab = null;
     [SerializeField] private int _emojiCount = 3;
@@ -101,6 +102,9 @@ public class Dictionary : MonoBehaviour
     {
         StartCoroutine(Utils.CrossFading(_label.rectTransform.anchoredPosition, _label.rectTransform.anchoredPosition + Vector2.up * 1000f, 1f,
             (pos) => _label.rectTransform.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
+        
+        StartCoroutine(Utils.CrossFading(_winPrize.rectTransform.anchoredPosition, _winPrize.rectTransform.anchoredPosition + Vector2.up * 1000f, 1f,
+            (pos) => _winPrize.rectTransform.anchoredPosition = pos, (a, b, c) => Vector2.Lerp(a, b, c)));
 
         RectTransform containerRect = _container.GetComponent<RectTransform>();
         StartCoroutine(Utils.CrossFading(containerRect.anchoredPosition, containerRect.anchoredPosition + Vector2.down * 1000f, 1f,
